@@ -9,7 +9,7 @@ import {
   vertexEvents,
   diffSignMap,
   range,
-  getHoshis,
+  getHoshis
 } from "./helper.js";
 import { CoordX, CoordY } from "./Coord.js";
 import Grid from "./Grid.js";
@@ -44,16 +44,25 @@ export default class Goban extends Component {
         clearAnimatedVerticesHandler: setTimeout(() => {
           this.setState({
             animatedVertices: [],
-            clearAnimatedVerticesHandler: null,
+            clearAnimatedVerticesHandler: null
           });
-        }, this.props.animationDuration ?? 200),
+        }, this.props.animationDuration ?? 200)
       });
     }
   }
 
   render() {
-    let { width, height, rangeX, rangeY, xs, ys, hoshis, shiftMap, randomMap } =
-      this.state;
+    let {
+      width,
+      height,
+      rangeX,
+      rangeY,
+      xs,
+      ys,
+      hoshis,
+      shiftMap,
+      randomMap
+    } = this.state;
 
     let {
       innerProps = {},
@@ -70,7 +79,7 @@ export default class Goban extends Component {
       showCoordinates = false,
       lines = [],
       selectedVertices = [],
-      dimmedVertices = [],
+      dimmedVertices = []
     } = this.props;
 
     let animatedVertices = [].concat(
@@ -87,7 +96,7 @@ export default class Goban extends Component {
           "shudan-goban-image",
           {
             "shudan-busy": busy,
-            "shudan-coordinates": showCoordinates,
+            "shudan-coordinates": showCoordinates
           },
           this.props.class ?? this.props.className
         ),
@@ -97,8 +106,8 @@ export default class Goban extends Component {
           gridTemplateColumns: showCoordinates ? "1em 1fr 1em" : "1fr",
           fontSize: vertexSize,
           lineHeight: "1em",
-          ...(this.props.style ?? {}),
-        },
+          ...(this.props.style ?? {})
+        }
       },
 
       showCoordinates &&
@@ -108,7 +117,7 @@ export default class Goban extends Component {
           height,
           ys,
           style: { gridRow: "2", gridColumn: "1" },
-          coordY,
+          coordY
         }),
 
       h(
@@ -120,8 +129,8 @@ export default class Goban extends Component {
             width: `${xs.length}em`,
             height: `${ys.length}em`,
             gridRow: showCoordinates ? "2" : "1",
-            gridColumn: showCoordinates ? "2" : "1",
-          },
+            gridColumn: showCoordinates ? "2" : "1"
+          }
         },
 
         h(Grid, {
@@ -130,7 +139,7 @@ export default class Goban extends Component {
           height,
           xs,
           ys,
-          hoshis,
+          hoshis
         }),
 
         h(
@@ -146,13 +155,13 @@ export default class Goban extends Component {
               left: 0,
               right: 0,
               bottom: 0,
-              zIndex: 1,
-            },
+              zIndex: 1
+            }
           },
 
-          ys.map((y) =>
-            xs.map((x) => {
-              let equalsVertex = (v) => vertexEquals(v, [x, y]);
+          ys.map(y =>
+            xs.map(x => {
+              let equalsVertex = v => vertexEquals(v, [x, y]);
               let selected = selectedVertices.some(equalsVertex);
 
               return h(
@@ -185,20 +194,20 @@ export default class Goban extends Component {
                     selected,
                     selectedLeft:
                       selected &&
-                      selectedVertices.some((v) => vertexEquals(v, [x - 1, y])),
+                      selectedVertices.some(v => vertexEquals(v, [x - 1, y])),
                     selectedRight:
                       selected &&
-                      selectedVertices.some((v) => vertexEquals(v, [x + 1, y])),
+                      selectedVertices.some(v => vertexEquals(v, [x + 1, y])),
                     selectedTop:
                       selected &&
-                      selectedVertices.some((v) => vertexEquals(v, [x, y - 1])),
+                      selectedVertices.some(v => vertexEquals(v, [x, y - 1])),
                     selectedBottom:
                       selected &&
-                      selectedVertices.some((v) => vertexEquals(v, [x, y + 1])),
+                      selectedVertices.some(v => vertexEquals(v, [x, y + 1]))
                   },
 
-                  ...vertexEvents.map((e) => ({
-                    [`on${e}`]: this.props[`onVertex${e}`],
+                  ...vertexEvents.map(e => ({
+                    [`on${e}`]: this.props[`onVertex${e}`]
                   }))
                 )
               );
@@ -217,16 +226,15 @@ export default class Goban extends Component {
               width: "100%",
               height: "100%",
               pointerEvents: "none",
-              zIndex: 2,
-            },
+              zIndex: 2
+            }
           },
 
           h(
             "g",
             {
-              transform: `translate(-${rangeX[0] * vertexSize} -${
-                rangeY[0] * vertexSize
-              })`,
+              transform: `translate(-${rangeX[0] * vertexSize} -${rangeY[0] *
+                vertexSize})`
             },
 
             lines.map(({ v1, v2, type }, i) =>
@@ -241,7 +249,7 @@ export default class Goban extends Component {
           height,
           ys,
           style: { gridRow: "2", gridColumn: "3" },
-          coordY,
+          coordY
         }),
       showCoordinates &&
         h(CoordX, { xs, style: { gridRow: "3", gridColumn: "2" }, coordX })
@@ -249,7 +257,7 @@ export default class Goban extends Component {
   }
 }
 
-Goban.getDerivedStateFromProps = function (props, state) {
+Goban.getDerivedStateFromProps = function(props, state) {
   let { signMap = [], rangeX = [0, Infinity], rangeY = [0, Infinity] } = props;
 
   let width = signMap.length === 0 ? 0 : signMap[0].length;
@@ -268,7 +276,7 @@ Goban.getDerivedStateFromProps = function (props, state) {
 
     let result = {
       signMap,
-      animatedVertices,
+      animatedVertices
     };
 
     if (
@@ -281,7 +289,7 @@ Goban.getDerivedStateFromProps = function (props, state) {
         rangeX,
         rangeY,
         xs: range(width).slice(rangeX[0], rangeX[1] + 1),
-        ys: range(height).slice(rangeY[0], rangeY[1] + 1),
+        ys: range(height).slice(rangeY[0], rangeY[1] + 1)
       });
     }
 
@@ -301,7 +309,7 @@ Goban.getDerivedStateFromProps = function (props, state) {
     xs: range(width).slice(rangeX[0], rangeX[1] + 1),
     ys: range(height).slice(rangeY[0], rangeY[1] + 1),
     hoshis: getHoshis(width, height),
-    shiftMap: readjustShifts(signMap.map((row) => row.map((_) => random(8)))),
-    randomMap: signMap.map((row) => row.map((_) => random(4))),
+    shiftMap: readjustShifts(signMap.map(row => row.map(_ => random(8)))),
+    randomMap: signMap.map(row => row.map(_ => random(4)))
   };
 };

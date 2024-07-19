@@ -7,7 +7,7 @@ export default class BoundedGoban extends Component {
 
     this.state = {
       vertexSize: 1,
-      visibility: "hidden",
+      visibility: "hidden"
     };
   }
 
@@ -24,7 +24,7 @@ export default class BoundedGoban extends Component {
       rangeX,
       rangeY,
       signMap,
-      onResized = () => {},
+      onResized = () => {}
     } = this.props;
 
     if (
@@ -61,15 +61,15 @@ export default class BoundedGoban extends Component {
 
       innerProps: {
         ...innerProps,
-        ref: (el) => (innerRef(el), (this.element = el)),
+        ref: el => (innerRef(el), (this.element = el))
       },
 
       style: {
         visibility: this.state.visibility,
-        ...style,
+        ...style
       },
 
-      vertexSize: Math.min(this.state.vertexSize, maxVertexSize),
+      vertexSize: Math.min(this.state.vertexSize, maxVertexSize)
     });
   }
 }

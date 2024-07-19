@@ -10,25 +10,25 @@ export const vertexEvents = [
   "PointerUp",
   "PointerMove",
   "PointerEnter",
-  "PointerLeave",
+  "PointerLeave"
 ];
 
-export const avg = (xs) =>
+export const avg = xs =>
   xs.length === 0 ? 0 : xs.reduce((sum, x) => sum + x, 0) / xs.length;
 
-export const range = (n) =>
+export const range = n =>
   Array(n)
     .fill(0)
     .map((_, i) => i);
 
-export const random = (n) => Math.floor(Math.random() * (n + 1));
+export const random = n => Math.floor(Math.random() * (n + 1));
 
 export const neighborhood = ([x, y]) => [
   [x, y],
   [x - 1, y],
   [x + 1, y],
   [x, y - 1],
-  [x, y + 1],
+  [x, y + 1]
 ];
 
 export const vertexEquals = ([x1, y1], [x2, y2]) => x1 === x2 && y1 === y2;
@@ -37,20 +37,20 @@ export const lineEquals = ([v1, w1], [v2, w2]) =>
   vertexEquals(v1, v2) && vertexEquals(w1, w2);
 
 export const signEquals = (...xs) =>
-  xs.length === 0 ? true : xs.every((x) => Math.sign(x) === Math.sign(xs[0]));
+  xs.length === 0 ? true : xs.every(x => Math.sign(x) === Math.sign(xs[0]));
 
 export function getHoshis(width, height) {
   if (Math.min(width, height) <= 6) return [];
 
-  let [nearX, nearY] = [width, height].map((x) => (x >= 13 ? 3 : 2));
+  let [nearX, nearY] = [width, height].map(x => (x >= 13 ? 3 : 2));
   let [farX, farY] = [width - nearX - 1, height - nearY - 1];
-  let [middleX, middleY] = [width, height].map((x) => (x - 1) / 2);
+  let [middleX, middleY] = [width, height].map(x => (x - 1) / 2);
 
   let result = [
     [nearX, farY],
     [farX, nearY],
     [farX, farY],
-    [nearX, nearY],
+    [nearX, nearY]
   ];
 
   if (width % 2 !== 0 && height % 2 !== 0 && width !== 7 && height !== 7)
@@ -79,26 +79,26 @@ export function readjustShifts(shiftMap, vertex = null) {
       [
         [1, 5, 8],
         [x - 1, y],
-        [3, 7, 6],
+        [3, 7, 6]
       ],
       // Top
       [
         [2, 5, 6],
         [x, y - 1],
-        [4, 7, 8],
+        [4, 7, 8]
       ],
       // Right
       [
         [3, 7, 6],
         [x + 1, y],
-        [1, 5, 8],
+        [1, 5, 8]
       ],
       // Bottom
       [
         [4, 7, 8],
         [x, y + 1],
-        [2, 5, 6],
-      ],
+        [2, 5, 6]
+      ]
     ];
 
     for (let [directions, [qx, qy], removeShifts] of data) {

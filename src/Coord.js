@@ -4,7 +4,7 @@ import { alpha } from "./helper.js";
 export function CoordX({
   style,
   xs,
-  coordX = (i) => alpha[i] || alpha[alpha.length - 1],
+  coordX = i => alpha[i] || alpha[alpha.length - 1]
 }) {
   return h(
     "div",
@@ -13,11 +13,11 @@ export function CoordX({
       style: {
         display: "flex",
         textAlign: "center",
-        ...style,
-      },
+        ...style
+      }
     },
 
-    xs.map((i) =>
+    xs.map(i =>
       h(
         "div",
         { key: i, style: { width: "1em" } },
@@ -27,18 +27,18 @@ export function CoordX({
   );
 }
 
-export function CoordY({ style, height, ys, coordY = (i) => height - i }) {
+export function CoordY({ style, height, ys, coordY = i => height - i }) {
   return h(
     "div",
     {
       className: "shudan-coordy",
       style: {
         textAlign: "center",
-        ...style,
-      },
+        ...style
+      }
     },
 
-    ys.map((i) =>
+    ys.map(i =>
       h(
         "div",
         { key: i, style: { height: "1em" } },

@@ -5,8 +5,8 @@ export default function Marker({ sign, type, label, zIndex }) {
     className: "shudan-marker",
     style: {
       position: "absolute",
-      zIndex,
-    },
+      zIndex
+    }
   };
 
   return type === "label"
@@ -15,7 +15,7 @@ export default function Marker({ sign, type, label, zIndex }) {
         "svg",
         {
           ...containerProps,
-          viewBox: "0 0 1 1",
+          viewBox: "0 0 1 1"
         },
 
         type === "circle" || type === "loader" || type === "point"
@@ -23,7 +23,7 @@ export default function Marker({ sign, type, label, zIndex }) {
               cx: 0.5,
               cy: 0.5,
               r: type === "point" ? 0.18 : 0.25,
-              "vector-effect": "non-scaling-stroke",
+              "vector-effect": "non-scaling-stroke"
             })
           : type === "square"
           ? h("rect", {
@@ -31,7 +31,7 @@ export default function Marker({ sign, type, label, zIndex }) {
               y: 0.25,
               width: 0.5,
               height: 0.5,
-              "vector-effect": "non-scaling-stroke",
+              "vector-effect": "non-scaling-stroke"
             })
           : type === "cross"
           ? [
@@ -41,19 +41,19 @@ export default function Marker({ sign, type, label, zIndex }) {
                   y: 0.25,
                   width: 0.5,
                   height: 0.5,
-                  stroke: "none",
+                  stroke: "none"
                 }),
               h("path", {
                 d: "M 0 0 L .5 .5 M .5 0 L 0 .5",
                 transform: "translate(.25 .25)",
-                "vector-effect": "non-scaling-stroke",
-              }),
+                "vector-effect": "non-scaling-stroke"
+              })
             ]
           : type === "triangle"
           ? h("path", {
               d: "M 0 .5 L .6 .5 L .3 0 z",
               transform: "translate(.2 .2)",
-              "vector-effect": "non-scaling-stroke",
+              "vector-effect": "non-scaling-stroke"
             })
           : null
       );

@@ -20,8 +20,8 @@ export default function Grid(props) {
             left: 0,
             width: "100%",
             height: "100%",
-            zIndex: 0,
-          },
+            zIndex: 0
+          }
         },
 
         // Draw grid lines
@@ -39,7 +39,7 @@ export default function Grid(props) {
               xs[xs.length - 1] === width - 1
                 ? (2 * xs.length - 1) * halfVertexSize - x
                 : xs.length * vertexSize - x,
-            height: 1,
+            height: 1
           });
         }),
 
@@ -56,7 +56,7 @@ export default function Grid(props) {
             height:
               ys[ys.length - 1] === height - 1
                 ? (2 * ys.length - 1) * halfVertexSize - y
-                : ys.length * vertexSize - y,
+                : ys.length * vertexSize - y
           });
         }),
 
@@ -73,7 +73,7 @@ export default function Grid(props) {
             className: "shudan-hoshi",
             cx: fl((2 * i + 1) * halfVertexSize - 0.5) + 0.5,
             cy: fl((2 * j + 1) * halfVertexSize - 0.5) + 0.5,
-            r: ".1em",
+            r: ".1em"
           });
         })
       ),

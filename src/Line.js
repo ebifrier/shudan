@@ -5,7 +5,7 @@ export default function Line(props) {
   let { v1, v2, type = "line", vertexSize } = props;
   if (vertexEquals(v1, v2)) return;
 
-  let [pos1, pos2] = [v1, v2].map((v) => v.map((x) => x * vertexSize));
+  let [pos1, pos2] = [v1, v2].map(v => v.map(x => x * vertexSize));
   let [dx, dy] = pos1.map((x, i) => pos2[i] - x);
   let [left, top] = pos1.map((x, i) => (x + pos2[i] + vertexSize) / 2);
 
@@ -25,6 +25,6 @@ export default function Line(props) {
           })()
         : ""
     }`,
-    transform: `rotate(${angle} ${left} ${top}) translate(${-length / 2} 0)`,
+    transform: `rotate(${angle} ${left} ${top}) translate(${-length / 2} 0)`
   });
 }

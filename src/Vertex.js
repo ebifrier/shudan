@@ -5,9 +5,9 @@ import classnames from "classnames";
 import { avg, vertexEvents, signEquals } from "./helper.js";
 import Marker from "./Marker.js";
 
-const absoluteStyle = (zIndex) => ({
+const absoluteStyle = zIndex => ({
   position: "absolute",
-  zIndex,
+  zIndex
 });
 
 export default function Vertex(props) {
@@ -34,28 +34,28 @@ export default function Vertex(props) {
     selectedLeft,
     selectedRight,
     selectedTop,
-    selectedBottom,
+    selectedBottom
   } = props;
 
   let eventHandlers = {};
 
   for (let eventName of vertexEvents) {
     eventHandlers[eventName] = useCallback(
-      (evt) => {
+      evt => {
         props[`on${eventName}`]?.(evt, position);
       },
       [...position, props[`on${eventName}`]]
     );
   }
 
-  let markerMarkup = (zIndex) =>
+  let markerMarkup = zIndex =>
     !!marker &&
     h(Marker, {
       key: "marker",
       sign,
       type: marker.type,
       label: marker.label,
-      zIndex,
+      zIndex
     });
 
   return h(
@@ -67,7 +67,7 @@ export default function Vertex(props) {
 
         title: marker?.label,
         style: {
-          position: "relative",
+          position: "relative"
         },
         className: classnames(
           "shudan-vertex",
@@ -98,12 +98,12 @@ export default function Vertex(props) {
 
             [`shudan-ghost_${ghostStone?.sign}`]: !!ghostStone,
             [`shudan-ghost_${ghostStone?.type}`]: !!ghostStone?.type,
-            "shudan-ghost_faint": !!ghostStone?.faint,
+            "shudan-ghost_faint": !!ghostStone?.faint
           }
-        ),
+        )
       },
-      ...vertexEvents.map((eventName) => ({
-        [`on${eventName}`]: eventHandlers[eventName],
+      ...vertexEvents.map(eventName => ({
+        [`on${eventName}`]: eventHandlers[eventName]
       }))
     ),
 
@@ -113,7 +113,7 @@ export default function Vertex(props) {
       h("div", {
         key: "ghost",
         className: "shudan-ghost",
-        style: absoluteStyle(1),
+        style: absoluteStyle(1)
       }),
 
     h(
@@ -131,7 +131,7 @@ export default function Vertex(props) {
               `shudan-random_${random}`,
               `shudan-sign_${sign}`
             ),
-            style: absoluteStyle(),
+            style: absoluteStyle()
           },
           sign
         ),
@@ -149,9 +149,9 @@ export default function Vertex(props) {
             (!!paint
               ? [paint]
               : [paintLeft, paintRight, paintTop, paintBottom].map(
-                  (x) => x !== 0 && !isNaN(x)
+                  x => x !== 0 && !isNaN(x)
                 )
-            ).map((x) => Math.abs(x ?? 0) * 0.5)
+            ).map(x => Math.abs(x ?? 0) * 0.5)
           ),
           "--shudan-paint-box-shadow": [
             signEquals(paintLeft, paintTop, paintTopLeft)
@@ -165,9 +165,9 @@ export default function Vertex(props) {
               : null,
             signEquals(paintRight, paintBottom, paintBottomRight)
               ? [Math.sign(paintBottom), ".5em .5em"]
-              : null,
+              : null
           ]
-            .filter((x) => !!x && x[0] !== 0)
+            .filter(x => !!x && x[0] !== 0)
             .map(
               ([sign, translation]) =>
                 `${translation} 0 0 var(${
@@ -176,21 +176,21 @@ export default function Vertex(props) {
                     : "--shudan-white-background-color"
                 })`
             )
-            .join(","),
-        },
+            .join(",")
+        }
       }),
 
     !!selected &&
       h("div", {
         key: "selection",
         className: "shudan-selection",
-        style: absoluteStyle(4),
+        style: absoluteStyle(4)
       }),
 
     h("div", {
       key: "heat",
       className: "shudan-heat",
-      style: absoluteStyle(5),
+      style: absoluteStyle(5)
     }),
     heat?.text != null &&
       h(
@@ -198,7 +198,7 @@ export default function Vertex(props) {
         {
           key: "heatlabel",
           className: "shudan-heatlabel",
-          style: absoluteStyle(6),
+          style: absoluteStyle(6)
         },
         heat.text && heat.text.toString()
       )
